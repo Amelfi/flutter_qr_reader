@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_qr_reader/providers/ui_provider.dart';
+// import 'package:flutter_qr_reader/models/models.dart';
+import 'package:flutter_qr_reader/providers/providers.dart';
 import 'package:flutter_qr_reader/screens/address_screen.dart';
 import 'package:flutter_qr_reader/screens/map_history.dart';
 import 'package:flutter_qr_reader/widget/widget.dart';
@@ -18,14 +19,17 @@ class HomeScreen extends StatelessWidget {
         ),
         actions: [
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Provider.of<ScanListProvider>(context, listen: false).deleteAllScans();
+
+              },
               icon: const Icon(
                 Icons.delete_forever,
-                color: Colors.white,
+              color: Colors.white,
               ))
         ],
       ),
-      body:  _HomePageBody(),
+      body: _HomePageBody(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: const ScanButton(),
       bottomNavigationBar: const CustomNavigationBar(),
@@ -38,16 +42,23 @@ class _HomePageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final currentIndex = Provider.of<UiProvider>(context);
+    // final tempScan = ScanModel(valor: 'http://google.com');
+    // DBProvider.db.getScanByType('http').then((value) => print(value.tipo));
+    final scanListProvider =
+        Provider.of<ScanListProvider>(context, listen: false);
+
     switch (currentIndex.selectedMenuOpt) {
       case 0:
-        return MapHistory();
+        scanListProvider.getScansByType('geo');
+        return const MapHistory();
       case 1:
-        return AddressScreen();
+        scanListProvider.getScansByType('http');
+        return const AddressScreen();
 
       default:
-        return MapHistory();
+        // scanListProvider.getScansByType('geo');
+        return const MapHistory();
     }
   }
 }

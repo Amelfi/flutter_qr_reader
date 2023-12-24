@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 
-class MapHistory extends StatelessWidget {
+// import 'package:flutter_qr_reader/models/models.dart';
 
-  // const MapHistory({Key? key}) : super(key: key);
-  
+
+import '../widget/widget.dart';
+
+class MapHistory extends StatelessWidget {
+  const MapHistory({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return const  Center(
-        child: Text('Map History'),
 
-    );
+    // data.getScans();
+    return ScanListView( icon: Icons.map_outlined, );
   }
 }
+
+

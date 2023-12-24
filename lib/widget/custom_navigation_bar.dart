@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_qr_reader/providers/ui_provider.dart';
+import 'package:flutter_qr_reader/providers/providers.dart';
 import 'package:provider/provider.dart';
 
 class CustomNavigationBar extends StatelessWidget {
